@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include "util.h"
 #include "errormsg.h"
@@ -19,13 +20,13 @@ string toknames[] = {
 };
 
 
-string tokname(tok) {
+string tokname(int tok) {
   return tok<257 || tok>299 ? "BAD_TOKEN" : toknames[tok-257];
 }
 
 int main(int argc, char **argv) {
  string fname; int tok;
- if (argc!=2) {fprintf(stderr,"usage: a.out filename\n"); exit(1);}
+ if (argc!=2) {fprintf(stderr,"usage: lextest filename\n"); exit(1);}
  fname=argv[1];
  EM_reset(fname);
  for(;;) {
