@@ -7,16 +7,16 @@
 
 typedef enum {A_Type_Stmt, A_Type_Exp, A_Type_ExpList} A_NodeType;
 int calPrintStmArgsCount(A_stm);
-void traverse(void *node, A_NodeType tp, int *maxArgs); 
+void traverse(void *node, A_NodeType tp, int *maxArgs);
 
 /*
  * 计算语句中所有的print语句中参数最多的那个，并返回其参数个数
  */
 int maxargs(A_stm stm) {
-    // 使用 CLR 顺序遍历树，当发现print语句时，统计其参数值，
-    int maxArgs = 0;
-    traverse(stm, A_Type_Stmt, &maxArgs);
-    return maxArgs;
+  // 使用 CLR 顺序遍历树，当发现print语句时，统计其参数值，
+  int maxArgs = 0;
+  traverse(stm, A_Type_Stmt, &maxArgs);
+  return maxArgs;
 }
 
 /*
