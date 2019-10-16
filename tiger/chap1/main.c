@@ -1,9 +1,11 @@
-#include "prog1.h"
-#include "slp.h"
-#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "util.h"
+
+#include "prog1.h"
+#include "slp.h"
 
 typedef enum { A_Type_Stmt, A_Type_Exp, A_Type_ExpList } A_NodeType;
 int calPrintStmArgsCount(A_stm);

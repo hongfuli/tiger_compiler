@@ -3,12 +3,13 @@
  *              error messages about the Tiger program.
  *
  */
-
-#include "errormsg.h"
-#include "util.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "util.h"
+
+#include "errormsg.h"
 
 bool anyErrors = FALSE;
 

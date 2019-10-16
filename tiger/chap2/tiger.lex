@@ -1,6 +1,7 @@
 %{
 #include <string.h>
 #include <stdio.h>
+
 #include "util.h"
 #include "tokens.h"
 #include "errormsg.h"
@@ -25,12 +26,19 @@ char *quoteChar = "\"";
 %}
 
 %%
-" "	 {adjust(); continue;}
+
+  /* 规则书写原则：
+   1. 优先匹配较长的规则 
+   2. 如果两条规则长度相同，则书写顺序很重要，优先匹配靠前的规则 
+  */
+
+[\t ]	 {adjust(); continue;}
 \n	 {adjust(); EM_newline(); continue;}
 \/\*.*?\*\/   {
     adjust();
     printf("==comment: %s\n", yytext);
 }
+  /* 双引号包含的字符串，因为要考虑转义字符，所以使用 yymore, input 等lex高级特性 */
 \"[^"]*  {
         if (yytext[yyleng - 1] == '\\') {
             yymore();
@@ -46,7 +54,9 @@ char *quoteChar = "\"";
             return STRING;
         }
     }
+
 [0-9]+	 {adjust(); yylval.ival=atoi(yytext); return INT;}
+
 ","	 {adjust(); return COMMA;}
 ":"	 {adjust(); return COLON;}
 ";"	 {adjust(); return SEMICOLON;}
@@ -70,6 +80,7 @@ char *quoteChar = "\"";
 "&"	 {adjust(); return AND;}
 "|"	 {adjust(); return OR;}
 ":="	 {adjust(); return ASSIGN;}
+
 "array of"	 {adjust(); return ARRAY;}
 "if"	 {adjust(); return IF;}
 "then"	 {adjust(); return THEN;}
