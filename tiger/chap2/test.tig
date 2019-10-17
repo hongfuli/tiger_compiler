@@ -2,6 +2,9 @@
 
 let 
 
+/* this a syntax error */
+1ab
+
  type any = {any : int}
  var buffer := getchar()
 

@@ -99,6 +99,7 @@ char *quoteChar = "\"";
 "var"  	 {adjust(); return VAR;}
 "type"  	 {adjust(); return TYPE;}
 [a-zA-Z][a-zA-Z0-9]*  {adjust(); yylval.sval=yytext; return ID;}
+[0-9]+[a-zA-Z]*  {adjust(); EM_error(EM_tokPos, "id not begin with digit");}
 .	 {adjust(); EM_error(EM_tokPos,"illegal token");}
 
 
